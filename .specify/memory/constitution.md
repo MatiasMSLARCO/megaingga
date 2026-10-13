@@ -39,6 +39,11 @@ El e-commerce industrial no es una tienda minorista con pasarela de pago directo
 3. **Cierre de Cotización (RFQ Checkout)**:
    - Generación de resumen de cotización formal con número de referencia generado.
    - Opciones directas de exportación/descarga o enlace de envío directo preformateado a WhatsApp corporativo oficial (+593 998314070).
+4. **Extensión: Compra Inmediata Simulada (Demo)**:
+   - Además del flujo RFQ, el sitio ofrece un segundo camino de "Comprar Ahora" con pasarela de pago **100% simulada** (sin integración real a ningún procesador de pagos, sin backend, sin envío de datos a ningún servidor).
+   - Los precios mostrados en este flujo son **referenciales de demo** (no existe tarifario público real para este modelo B2B); se muestran etiquetados como tales.
+   - La pantalla de pago debe rotular explícitamente que es un ambiente de pruebas, para que nunca se confunda con un cobro real.
+   - Este flujo convive con el RFQ sin reemplazarlo: el usuario elige cotizar o "comprar" (simulado) según su necesidad.
 
 ### Principio IV: Calidad de Código, Cero Regresiones y Verificación Continua
 1. **Compilación y Tipado**: `tsc -b` debe compilar sin emitir un solo error o advertencia. Se prohíbe el uso de `any` sin justificación explícita.

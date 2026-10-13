@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FileCheck2, Minus, Plus } from 'lucide-react'
+import { CreditCard, FileCheck2, Minus, Plus } from 'lucide-react'
 import { Modal } from '@/components/ui/Modal'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -9,9 +9,10 @@ interface ProductDetailModalProps {
   product: Product | null
   onClose: () => void
   onAddToQuote: (product: Product, quantity: number) => void
+  onBuyNow: (product: Product, quantity: number) => void
 }
 
-export function ProductDetailModal({ product, onClose, onAddToQuote }: ProductDetailModalProps) {
+export function ProductDetailModal({ product, onClose, onAddToQuote, onBuyNow }: ProductDetailModalProps) {
   const [quantity, setQuantity] = useState(1)
 
   if (!product) return null
@@ -20,6 +21,11 @@ export function ProductDetailModal({ product, onClose, onAddToQuote }: ProductDe
     onAddToQuote(product, quantity)
     setQuantity(1)
     onClose()
+  }
+
+  const handleBuyNow = () => {
+    onBuyNow(product, quantity)
+    setQuantity(1)
   }
 
   const images = [product.imageUrl, ...(product.gallery ?? [])]
@@ -82,28 +88,41 @@ export function ProductDetailModal({ product, onClose, onAddToQuote }: ProductDe
             </div>
           )}
 
-          <div className="mt-auto flex items-center gap-4 border-t border-brand-border-soft pt-4">
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                aria-label="Disminuir cantidad"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-brand-border text-brand-dark hover:border-brand-red hover:text-brand-red cursor-pointer"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="w-8 text-center text-sm font-semibold text-brand-dark">{quantity}</span>
-              <button
-                type="button"
-                onClick={() => setQuantity((q) => q + 1)}
-                aria-label="Aumentar cantidad"
-                className="flex h-9 w-9 items-center justify-center rounded-md border border-brand-border text-brand-dark hover:border-brand-red hover:text-brand-red cursor-pointer"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
+          <div className="mt-auto flex flex-col gap-2.5 border-t border-brand-border-soft pt-4">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1 rounded-lg border border-brand-border bg-zinc-50 p-1">
+                <button
+                  type="button"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  aria-label="Disminuir cantidad"
+                  className="flex h-8 w-8 items-center justify-center rounded text-brand-dark hover:bg-white hover:text-brand-red cursor-pointer"
+                >
+                  <Minus className="h-4 w-4" />
+                </button>
+                <span className="w-8 text-center text-sm font-bold text-brand-dark">{quantity}</span>
+                <button
+                  type="button"
+                  onClick={() => setQuantity((q) => q + 1)}
+                  aria-label="Aumentar cantidad"
+                  className="flex h-8 w-8 items-center justify-center rounded text-brand-dark hover:bg-white hover:text-brand-red cursor-pointer"
+                >
+                  <Plus className="h-4 w-4" />
+                </button>
+              </div>
+
+              <Button className="flex-1 gap-2 font-bold py-2.5 bg-brand-dark hover:bg-brand-red text-white" onClick={handleAdd}>
+                <FileCheck2 className="h-4 w-4" />
+                <span>Agregar a Cotización</span>
+              </Button>
             </div>
-            <Button className="flex-1" onClick={handleAdd}>
-              Agregar a Cotización
+
+            <Button
+              variant="outline"
+              className="w-full gap-2 border-zinc-300 text-zinc-700 hover:border-blue-600 hover:text-blue-600 font-medium py-2.5"
+              onClick={handleBuyNow}
+            >
+              <CreditCard className="h-4 w-4 text-blue-600" />
+              <span>Simular Pago Directo (Demo Pasarela)</span>
             </Button>
           </div>
         </div>

@@ -1,14 +1,15 @@
+import { Link } from 'react-router'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { companyInfo } from '@/data/company.data'
 import { Logo } from '@/components/ui/Logo'
 
 const INSTITUTIONAL_LINKS = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#proyectos', label: 'Proyectos' },
-  { href: '#clientes', label: 'Clientes' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/', label: 'Inicio' },
+  { href: '/#nosotros', label: 'Nosotros' },
+  { href: '/tienda', label: 'Servicios' },
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/#clientes', label: 'Clientes' },
+  { href: '/#contacto', label: 'Contacto' },
 ]
 
 const currentYear = new Date().getFullYear()
@@ -17,12 +18,12 @@ export function Footer() {
   const whatsappHref = `https://wa.me/${companyInfo.whatsappNumber}`
 
   return (
-    <footer id="contacto-footer" className="bg-brand-dark text-white">
+    <footer className="bg-brand-dark text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="flex flex-col gap-3 lg:col-span-2">
-          <a href="#inicio" className="w-fit">
+          <Link to="/" className="w-fit">
             <Logo className="h-8 w-auto" alt={companyInfo.brandName} />
-          </a>
+          </Link>
           <p className="max-w-md text-sm leading-relaxed text-white/60">{companyInfo.legalName}</p>
           <p className="max-w-md text-sm leading-relaxed text-white/60">
             Ingeniería y construcción de infraestructura hospitalaria, climatización industrial y proyectos civiles,
@@ -35,9 +36,9 @@ export function Footer() {
           <ul className="flex flex-col gap-2">
             {INSTITUTIONAL_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="text-sm text-white/70 transition-colors hover:text-brand-red">
+                <Link to={link.href} className="text-sm text-white/70 transition-colors hover:text-brand-red">
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

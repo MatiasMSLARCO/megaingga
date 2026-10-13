@@ -1,3 +1,6 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+
 const CLIENT_LOGOS = [
   '/assets/images/clients/cliente-omni-hospital.webp',
   '/assets/images/clients/cliente-logo-01.webp',
@@ -10,30 +13,48 @@ const CLIENT_LOGOS = [
   '/assets/images/clients/cliente-logo-08.webp',
 ]
 
-export function ClientsSection() {
-  return (
-    <section id="clientes" className="bg-brand-border-soft/40 py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 max-w-2xl">
-          <h2 className="text-3xl font-extrabold uppercase tracking-tight text-brand-dark sm:text-4xl">
-            Gracias por su confianza
-          </h2>
-          <div className="mt-3 h-1 w-16 bg-brand-red" />
-          <p className="mt-4 text-sm leading-relaxed text-brand-gray">
-            Empresas e instituciones que han confiado en Mega Ingeniería para sus proyectos, incluyendo{' '}
-            <span className="font-semibold text-brand-dark">Siemens Healthineers</span>.
-          </p>
-        </div>
+// Duplicado una vez para el loop continuo (el track se desplaza -50%, que equivale
+// exactamente al ancho de una copia completa de la lista).
+const MARQUEE_LOGOS = [...CLIENT_LOGOS, ...CLIENT_LOGOS]
 
-        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
-          {CLIENT_LOGOS.map((logo) => (
-            <div
-              key={logo}
-              className="flex h-24 items-center justify-center rounded-lg border border-brand-border-soft bg-white p-4 grayscale transition-all hover:grayscale-0"
-            >
-              <img src={logo} alt="Logo de cliente" className="max-h-full max-w-full object-contain" />
-            </div>
-          ))}
+export function ClientsSection() {
+  const ref = useScrollReveal<HTMLElement>()
+
+  return (
+    <section ref={ref} id="clientes" className="overflow-hidden border-t border-[#EAE8E3] bg-[#FAF9F6] py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div data-reveal className="mb-12">
+          <SectionHeading
+            title={
+              <>
+                Gracias por su <span className="italic text-brand-red">confianza</span>.
+              </>
+            }
+            subtitle={
+              <>
+                Empresas e instituciones que han confiado en Mega Ingeniería para sus proyectos, incluyendo{' '}
+                <span className="font-semibold text-brand-dark">Siemens Healthineers</span>.
+              </>
+            }
+          />
+        </div>
+      </div>
+
+      <div className="relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-[#FAF9F6] to-transparent sm:w-28" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-[#FAF9F6] to-transparent sm:w-28" />
+
+        <div className="group overflow-hidden">
+          <div className="flex w-max animate-[marquee-scroll_32s_linear_infinite] gap-6 motion-reduce:animate-none group-hover:[animation-play-state:paused]">
+            {MARQUEE_LOGOS.map((logo, idx) => (
+              <div
+                key={`${logo}-${idx}`}
+                className="flex h-24 w-40 shrink-0 items-center justify-center rounded-lg border border-brand-border-soft bg-white p-4 grayscale transition-all hover:grayscale-0"
+              >
+                <img src={logo} alt="Logo de cliente" className="max-h-full max-w-full object-contain" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

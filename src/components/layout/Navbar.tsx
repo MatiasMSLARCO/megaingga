@@ -1,16 +1,17 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import { Menu, X, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { companyInfo } from '@/data/company.data'
 import { Logo } from '@/components/ui/Logo'
 
 const NAV_LINKS = [
-  { href: '#inicio', label: 'Inicio' },
-  { href: '#nosotros', label: 'Nosotros' },
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#proyectos', label: 'Proyectos' },
-  { href: '#clientes', label: 'Clientes' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/', label: 'Inicio' },
+  { href: '/#nosotros', label: 'Nosotros' },
+  { href: '/tienda', label: 'Servicios' },
+  { href: '/#proyectos', label: 'Proyectos' },
+  { href: '/#clientes', label: 'Clientes' },
+  { href: '/#contacto', label: 'Contacto' },
 ]
 
 interface NavbarProps {
@@ -22,30 +23,32 @@ interface NavbarProps {
 export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
+  const isSolid = isScrolled || mobileOpen
+
   return (
     <header
       className={cn(
         'fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300',
-        isScrolled ? 'border-brand-border-soft bg-white/95 backdrop-blur-sm' : 'border-transparent bg-transparent'
+        isSolid ? 'border-brand-border-soft bg-white/95 backdrop-blur-md shadow-xs' : 'border-transparent bg-transparent'
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#inicio" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0">
           <Logo className="h-9 w-auto" alt={companyInfo.brandName} />
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-7 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
+              <Link
+                to={link.href}
                 className={cn(
                   'text-xs font-semibold uppercase tracking-wide transition-colors hover:text-brand-red',
-                  isScrolled ? 'text-brand-gray' : 'text-white/90'
+                  isSolid ? 'text-zinc-700' : 'text-white/90'
                 )}
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -71,7 +74,7 @@ export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
             aria-label="Abrir menú"
             className={cn(
               'inline-flex h-10 w-10 items-center justify-center rounded-md transition-colors cursor-pointer lg:hidden',
-              isScrolled ? 'text-brand-dark hover:bg-black/5' : 'text-white hover:bg-white/10'
+              isSolid ? 'text-brand-dark hover:bg-black/5' : 'text-white hover:bg-white/10'
             )}
           >
             {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -83,13 +86,13 @@ export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
         <ul className="flex flex-col gap-1 px-4 py-3">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
-                href={link.href}
+              <Link
+                to={link.href}
                 onClick={() => setMobileOpen(false)}
                 className="block rounded-md px-3 py-2.5 text-sm font-semibold uppercase tracking-wide text-brand-dark hover:bg-black/5"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
