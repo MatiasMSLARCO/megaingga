@@ -9,9 +9,9 @@
 1. Ejecutar `npm run dev` y abrir `http://localhost:5173`.
 2. **Validación**:
    - El Hero reproduce el video corporativo de obra en bucle (`hero-video.mp4`) con overlay oscuro.
-   - Se aprecia el headline en mayúsculas: *"INGENIERÍA Y CONSTRUCCIÓN DE INFRAESTRUCTURA HOSPITALARIA E INDUSTRIAL"*.
-   - La franja de métricas tipo Bechtel muestra: años de experiencia, obras ejecutadas, clientes atendidos.
-   - La barra de navegación es sticky y resalta la pestaña activa en `#E31E24`.
+   - Se aprecia el headline en mayúsculas extraído verbatim de megaingga.com: *"DISEÑAMOS Y CONSTRUIMOS TU CLÍNICA Y HOSPITAL"* / *"ESPECIALISTAS EN REMODELACIÓN Y CONSTRUCCIÓN DE CLÍNICAS Y HOSPITALES"*.
+   - La franja de métricas tipo Bechtel se omite intencionalmente: no existen cifras reales (años de experiencia, obras, clientes) en el contenido fuente extraído; decisión de usuario documentada en el plan de Fase 1-2.
+   - La barra de navegación es sticky con botón de cotizador y acceso a las 6 secciones.
 
 ---
 
@@ -27,9 +27,9 @@
 1. Hacer clic en **"Servicios / Catálogo"**.
 2. **Validación**:
    - Aparece un selector de filtros: *Todos*, *Acabados Hospitalarios*, *Climatización HVAC*, *Equipos Especiales*.
-   - Al pulsar *"Acabados Hospitalarios"*, solo se despliegan puertas herméticas, pisos conductivos, etc.
-   - Al escribir *"Chiller"* en la barra de búsqueda, se filtra el catálogo al instante.
-   - Al hacer clic en un producto, se abre el modal con especificaciones técnicas y normas ISO/ASHRAE.
+   - Al pulsar *"Acabados Hospitalarios"*, solo se despliegan puertas de quirófano, pisos vinílicos conductivos, etc.
+   - Al escribir *"quirófano"* en la barra de búsqueda, se filtra el catálogo al instante.
+   - Al hacer clic en un producto, se abre el modal con especificaciones técnicas; los productos de puertas muestran el material real documentado (Acero Inoxidable AISI 304).
 
 ---
 

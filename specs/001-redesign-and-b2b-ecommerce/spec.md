@@ -141,3 +141,37 @@ Este documento especifica la transformación integral del portal web en una expe
 - Los datos del catálogo y portafolio provienen de un servicio mock asíncrono que simula una API REST.
 - Los pedidos de cotización en esta fase Demo se completan a través de WhatsApp corporativo y descarga de resumen en el cliente, sin requerir pasarela de pago o base de datos externa.
 - Los assets fotográficos de baja resolución se utilizarán como miniaturas y se complementarán con un tratamiento visual técnico para maximizar su nitidez.
+
+---
+
+## 7. Propuesta Futura (no implementada): Migración a Arquitectura Multi-Página
+
+> **Estado**: Propuesta abierta, pendiente de aprobación. No forma parte del alcance implementado en `feature/001-redesign-and-b2b-ecommerce`. De aprobarse, ejecutar en una rama dedicada (ej. `feature/002-multipage-routing`).
+
+**Motivación**: la implementación actual es una landing de una sola página con navegación por anchors (`#nosotros`, `#servicios`, etc.). Al revisar el resultado en browser se detectó que contenido real de alto valor queda comprimido dentro de tarjetas en vez de tener espacio propio — el ejemplo más claro es el caso de obra **Siemens Healthineers en el Hospital Carlos Andrade Marín** (renovación de resonancia magnética), que hoy vive como una tarjeta más dentro de la grilla de "Proyectos", perdiendo detalle y protagonismo. Lo mismo aplica a los proyectos mecánicos, eléctricos y civiles, y a cada ficha de producto del catálogo (hoy resuelta como modal, no como página).
+
+Adicionalmente, los referentes de dirección visual citados en la constitución (Bechtel, Arup) son en la práctica sitios **multi-página profundos** — cada división de servicio y cada proyecto ejecutado tiene su propia URL indexable — no landings de una sola página.
+
+**Rutas propuestas**:
+- `/` — Home (hero + resumen institucional + llamadas a las demás secciones)
+- `/nosotros` — Misión, visión, política de calidad, valores
+- `/servicios` — Catálogo técnico (listado + filtros)
+- `/servicios/:slug` — Ficha de producto como página completa (hoy es modal: `ProductDetailModal`)
+- `/proyectos` — Portafolio (listado + filtros)
+- `/proyectos/:slug` — Caso de estudio completo por proyecto (ej. `/proyectos/renovacion-resonancia-magnetica-hcam`), con espacio para describir alcance, cliente y galería sin comprimir
+- `/clientes` — Referencias y logos
+- `/contacto` — Formulario y datos de contacto
+
+**Qué se gana**:
+- SEO real por división/producto/proyecto (cada página con su propio `<title>` y metadatos, indexable individualmente).
+- URLs compartibles y marcables (ej. enviar el link directo del caso Siemens Healthineers a un cliente potencial).
+- Espacio completo para casos de estudio y fichas técnicas, sin la restricción de un modal o una tarjeta de grilla.
+- Mayor fidelidad al patrón real de sitios de ingeniería de esta escala (Bechtel, Arup).
+
+**Qué cuesta**:
+- Nueva dependencia de ruteo (ej. `react-router`), hoy ausente de la pila técnica definida en `plan.md`/constitution.
+- Reestructuración de `src/App.tsx` (pasa de orquestador único a `RouterProvider` + layout compartido).
+- El carrito de cotización (`useQuoteCart`, persistido en `localStorage`) debe sobrevivir la navegación entre rutas — la lógica actual ya es compatible (no depende de estado en memoria de una sola vista), pero el componente que lo consume debe vivir en un layout raíz compartido entre rutas, no dentro de `App.tsx` como vista única.
+- `ProductDetailModal` y las tarjetas de proyecto migran de overlay/grilla a páginas reales con sus propias rutas.
+
+**Decisión**: aprobada por el usuario para ejecutarse **en una rama separada**, posterior a esta. No bloquea ni modifica el alcance ya implementado de `feature/001-redesign-and-b2b-ecommerce`.

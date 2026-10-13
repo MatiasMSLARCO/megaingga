@@ -25,3 +25,7 @@ dist-ssr
 
 # Agent metadata
 .claude/
+
+# Tool-generated artifacts (not source)
+.playwright-mcp/
+graphify-out/
