@@ -14,7 +14,12 @@ export async function getProjects(filter?: ProjectsFilter): Promise<Project[]> {
   return projectsMock
 }
 
-export async function getProjectById(id: string): Promise<Project | undefined> {
+export async function getProjectById(id: string): Promise<Project | null> {
   await delay()
-  return projectsMock.find((p) => p.id === id)
+  return projectsMock.find((p) => p.id === id) ?? null
+}
+
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  await delay()
+  return projectsMock.find((p) => p.slug === slug) ?? null
 }

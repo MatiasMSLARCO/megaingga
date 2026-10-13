@@ -25,9 +25,9 @@ export async function getProducts(filter?: ProductsFilter): Promise<Product[]> {
   return results
 }
 
-export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+export async function getProductBySlug(slug: string): Promise<Product | null> {
   await delay()
-  return productsMock.find((p) => p.slug === slug)
+  return productsMock.find((p) => p.slug === slug) ?? null
 }
 
 export async function getCategories(): Promise<string[]> {

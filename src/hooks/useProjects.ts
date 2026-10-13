@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getProjectById, getProjects, type ProjectsFilter } from '@/services/projects.service'
+import { getProjectById, getProjectBySlug, getProjects, type ProjectsFilter } from '@/services/projects.service'
 
 export function useProjects(filter?: ProjectsFilter) {
   return useQuery({
@@ -13,5 +13,13 @@ export function useProject(id: string | undefined) {
     queryKey: ['project', id],
     queryFn: () => getProjectById(id as string),
     enabled: Boolean(id),
+  })
+}
+
+export function useProjectBySlug(slug: string | undefined) {
+  return useQuery({
+    queryKey: ['project-slug', slug],
+    queryFn: () => getProjectBySlug(slug as string),
+    enabled: Boolean(slug),
   })
 }
