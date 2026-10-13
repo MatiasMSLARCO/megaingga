@@ -1,5 +1,10 @@
 export type ProjectDivision = 'hospitalario' | 'civil' | 'mecanico' | 'electrico'
 
+export interface ProjectScopeGroup {
+  title: string
+  items: string[]
+}
+
 export interface Project {
   id: string
   slug: string
@@ -10,6 +15,7 @@ export interface Project {
   year: number
   description: string
   scope: string[]
+  scopeGroups?: ProjectScopeGroup[]
   mainImageUrl: string
   galleryImages: string[]
   featured: boolean

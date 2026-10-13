@@ -1,13 +1,13 @@
 const CLIENT_LOGOS = [
-  '/assets/images/clients/logo-omni.jpg',
-  '/assets/images/clients/client-01.png',
-  '/assets/images/clients/client-02.jpg',
-  '/assets/images/clients/client-03.jpg',
-  '/assets/images/clients/client-04.png',
-  '/assets/images/clients/client-05.jpg',
-  '/assets/images/clients/client-06.png',
-  '/assets/images/clients/client-07.jpg',
-  '/assets/images/clients/client-08.png',
+  '/assets/images/clients/cliente-omni-hospital.webp',
+  '/assets/images/clients/cliente-logo-01.webp',
+  '/assets/images/clients/cliente-logo-02.webp',
+  '/assets/images/clients/cliente-logo-03.webp',
+  '/assets/images/clients/cliente-logo-04.webp',
+  '/assets/images/clients/cliente-logo-05.webp',
+  '/assets/images/clients/cliente-logo-06.webp',
+  '/assets/images/clients/cliente-logo-07.webp',
+  '/assets/images/clients/cliente-logo-08.webp',
 ]
 
 export function ClientsSection() {

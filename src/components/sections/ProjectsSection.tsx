@@ -85,18 +85,33 @@ export function ProjectsSection() {
                     Cliente: <span className="text-brand-dark">{project.clientName}</span>
                   </p>
                   <p className="text-sm leading-relaxed text-brand-gray">{project.description}</p>
-                  <ul className="mt-1 flex flex-wrap gap-1.5">
-                    {project.scope.slice(0, 3).map((item) => (
-                      <li key={item} className="rounded-full bg-brand-border-soft px-2.5 py-1 text-[11px] text-brand-dark">
-                        {item}
-                      </li>
-                    ))}
-                    {project.scope.length > 3 && (
-                      <li className="rounded-full bg-brand-border-soft px-2.5 py-1 text-[11px] text-brand-gray">
-                        +{project.scope.length - 3} más
-                      </li>
-                    )}
-                  </ul>
+                  {project.scopeGroups ? (
+                    <div className="mt-1 flex flex-col gap-2">
+                      {project.scopeGroups.map((group) => (
+                        <div key={group.title}>
+                          <p className="text-xs font-bold text-brand-red">{group.title}</p>
+                          <ul className="mt-1 flex flex-wrap gap-1.5">
+                            {group.items.map((item) => (
+                              <li
+                                key={item}
+                                className="rounded-full bg-brand-border-soft px-2.5 py-1 text-[11px] text-brand-dark"
+                              >
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ul className="mt-1 flex flex-wrap gap-1.5">
+                      {project.scope.map((item) => (
+                        <li key={item} className="rounded-full bg-brand-border-soft px-2.5 py-1 text-[11px] text-brand-dark">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               </Card>
             ))}

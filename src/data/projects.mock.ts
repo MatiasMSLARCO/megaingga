@@ -23,10 +23,10 @@ export const projectsMock: Project[] = [
       'Ingreso e instalación de nuevo equipo de resonancia magnética',
       'Acabados hospitalarios: vinil conductivo, protecciones de pared y puertas plomadas de blindaje',
     ],
-    mainImageUrl: '/assets/images/projects/hospitalario-siemens-1.jpeg',
+    mainImageUrl: '/assets/images/projects/proyecto-resonancia-siemens-hcam.webp',
     galleryImages: [
-      '/assets/images/projects/hospitalario-siemens-2.jpeg',
-      '/assets/images/products/acabados-hospitalarios-2.jpeg',
+      '/assets/images/projects/proyecto-remodelacion-medica-siemens.webp',
+      '/assets/images/products/puerta-plomada-radiacion.webp',
     ],
     featured: true,
   },
@@ -49,8 +49,29 @@ export const projectsMock: Project[] = [
       'Sistemas de aguas residuales',
       'Cimentaciones',
     ],
-    mainImageUrl: '/assets/images/projects/civil-1.jpg',
-    galleryImages: ['/assets/images/projects/division-overview-1.jpg', '/assets/images/projects/division-overview-2.jpg'],
+    scopeGroups: [
+      {
+        title: 'Proyectos Hospitalarios',
+        items: ['Diseño y construcción de quirófanos', 'Diseño y construcción de salas de UCI', 'Infraestructura general hospitalaria'],
+      },
+      {
+        title: 'Estructuras Metálicas',
+        items: ['Galpones industriales', 'Estructuras metálicas'],
+      },
+      {
+        title: 'Sistema Hidráulico',
+        items: ['Sistemas de presión constante', 'Sistemas de aguas residuales'],
+      },
+      {
+        title: 'Cimentaciones',
+        items: ['Cimentaciones'],
+      },
+    ],
+    mainImageUrl: '/assets/images/projects/proyecto-civil-infraestructura.webp',
+    galleryImages: [
+      '/assets/images/projects/proyecto-civil-estructuras-metalicas.webp',
+      '/assets/images/projects/proyecto-civil-galpones-industriales.webp',
+    ],
     featured: false,
   },
   {
@@ -72,8 +93,32 @@ export const projectsMock: Project[] = [
       'Asistencia técnica para sistemas de vapor',
       'Sistema de aire acondicionado y ventilación',
     ],
-    mainImageUrl: '/assets/images/projects/mecanico-1.jpeg',
-    galleryImages: ['/assets/images/projects/mecanico-2.jpeg'],
+    scopeGroups: [
+      {
+        title: 'Sistema Contra Incendio',
+        items: [
+          'Diseño y construcción de redes',
+          'Montaje de bombas eléctricas, motobombas y jockey',
+          'Mantenimiento de redes y bombas de sistemas contra incendio',
+        ],
+      },
+      {
+        title: 'Sistema de Vapor',
+        items: [
+          'Diseño y construcción de sistemas de vapor',
+          'Diseño y construcción de bombeo de combustible',
+          'Montaje de calderas',
+          'Mantenimiento de calderas y redes de distribución de vapor',
+          'Asistencia técnica para sistemas de vapor',
+        ],
+      },
+      {
+        title: 'Sistema de Aire Acondicionado y Ventilación',
+        items: ['Sistema de aire acondicionado y ventilación'],
+      },
+    ],
+    mainImageUrl: '/assets/images/projects/proyecto-mecanico-redes-contraincendio.webp',
+    galleryImages: ['/assets/images/projects/proyecto-mecanico-calderas-vapor.webp'],
     featured: false,
   },
   {
@@ -94,8 +139,27 @@ export const projectsMock: Project[] = [
       'Montaje de acometidas eléctricas',
       'Montaje y mantenimiento de equipos de generación',
     ],
-    mainImageUrl: '/assets/images/projects/division-overview-3.jpg',
-    galleryImages: ['/assets/images/projects/division-overview-4.jpeg'],
+    scopeGroups: [
+      {
+        title: 'Media Tensión',
+        items: ['Montaje de transformadores', 'Montaje de líneas de media tensión'],
+      },
+      {
+        title: 'Baja Tensión',
+        items: [
+          'Montaje de transformadores',
+          'Fabricación de tableros de potencia y control',
+          'Montaje de líneas de puesta a tierra',
+          'Montaje de acometidas eléctricas',
+        ],
+      },
+      {
+        title: 'Generación',
+        items: ['Montaje y mantenimiento de equipos de generación'],
+      },
+    ],
+    mainImageUrl: '/assets/images/projects/proyecto-electrico-media-tension.webp',
+    galleryImages: ['/assets/images/projects/proyecto-electrico-tableros-potencia.webp'],
     featured: false,
   },
 ]

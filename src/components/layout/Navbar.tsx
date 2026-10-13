@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Menu, X, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { companyInfo } from '@/data/company.data'
+import { Logo } from '@/components/ui/Logo'
 
 const NAV_LINKS = [
   { href: '#inicio', label: 'Inicio' },
@@ -30,7 +31,7 @@ export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#inicio" className="flex items-center shrink-0">
-          <img src="/assets/images/logo.jpg" alt={companyInfo.brandName} className="h-9 w-auto object-contain" />
+          <Logo className="h-9 w-auto" alt={companyInfo.brandName} />
         </a>
 
         <ul className="hidden items-center gap-7 lg:flex">

@@ -11,6 +11,7 @@ export function HeroSection({ onOpenQuote }: HeroSectionProps) {
       <video
         className="absolute inset-0 h-full w-full object-cover opacity-50"
         src="/assets/video/hero-video.mp4"
+        poster="/assets/images/hero/hero-planta-industrial.webp"
         autoPlay
         loop
         muted

@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { companyInfo } from '@/data/company.data'
+import { Logo } from '@/components/ui/Logo'
 
 const INSTITUTIONAL_LINKS = [
   { href: '#inicio', label: 'Inicio' },
@@ -19,9 +20,9 @@ export function Footer() {
     <footer id="contacto-footer" className="bg-brand-dark text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="flex flex-col gap-3 lg:col-span-2">
-          <div className="w-fit rounded-md bg-white px-3 py-2">
-            <img src="/assets/images/logo.jpg" alt={companyInfo.brandName} className="h-7 w-auto object-contain" />
-          </div>
+          <a href="#inicio" className="w-fit">
+            <Logo className="h-8 w-auto" alt={companyInfo.brandName} />
+          </a>
           <p className="max-w-md text-sm leading-relaxed text-white/60">{companyInfo.legalName}</p>
           <p className="max-w-md text-sm leading-relaxed text-white/60">
             Ingeniería y construcción de infraestructura hospitalaria, climatización industrial y proyectos civiles,
