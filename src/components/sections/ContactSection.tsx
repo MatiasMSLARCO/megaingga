@@ -25,7 +25,7 @@ export function ContactSection() {
   const ref = useScrollReveal<HTMLElement>({ stagger: 0.12 })
 
   return (
-    <section ref={ref} id="contacto" className="blueprint-grid-dark bg-brand-ink py-24">
+    <section ref={ref} id="contacto" className="blueprint-grid-dark bg-brand-ink py-24 scroll-mt-16">
       <div className="mx-auto grid max-w-7xl items-start gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
         <div data-reveal>
           <SectionHeading

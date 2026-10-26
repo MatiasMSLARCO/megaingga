@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from 'react-router'
+import { createBrowserRouter, Navigate, Outlet } from 'react-router'
 import { RootLayout } from '@/layouts/RootLayout'
 import { AuthLayout } from '@/layouts/AuthLayout'
 import { PortalLayout } from '@/layouts/PortalLayout'
@@ -7,7 +7,6 @@ import { RequireAuth } from '@/components/auth/RequireAuth'
 import { RequireBackofficeAuth } from '@/components/auth/RequireBackofficeAuth'
 import { BackofficeAuthProvider } from '@/context/BackofficeAuthProvider'
 import { LandingPage } from '@/pages/LandingPage'
-import { StorePage } from '@/pages/StorePage'
 import { CheckoutPage } from '@/pages/CheckoutPage'
 import { LoginPage } from '@/pages/LoginPage'
 import { BackofficeLoginPage } from '@/pages/backoffice/BackofficeLoginPage'
@@ -31,7 +30,7 @@ export const router = createBrowserRouter([
     Component: RootLayout,
     children: [
       { index: true, Component: LandingPage },
-      { path: 'tienda', Component: StorePage },
+      { path: 'tienda', Component: () => <Navigate to="/#suministros" replace /> },
       { path: 'checkout', Component: CheckoutPage },
     ],
   },

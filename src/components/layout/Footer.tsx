@@ -6,7 +6,7 @@ import { Logo } from '@/components/ui/Logo'
 const INSTITUTIONAL_LINKS = [
   { href: '/', label: 'Inicio' },
   { href: '/#nosotros', label: 'Nosotros' },
-  { href: '/tienda', label: 'Servicios' },
+  { href: '/#suministros', label: 'Insumos' },
   { href: '/#proyectos', label: 'Proyectos' },
   { href: '/#clientes', label: 'Clientes' },
   { href: '/#contacto', label: 'Contacto' },
@@ -17,11 +17,31 @@ const currentYear = new Date().getFullYear()
 export function Footer() {
   const whatsappHref = `https://wa.me/${companyInfo.whatsappNumber}`
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === '/') {
+      if (window.location.pathname === '/') {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.history.pushState(null, '', '/')
+      }
+      return
+    }
+    if (href.startsWith('/#')) {
+      const targetId = href.replace('/#', '')
+      const el = document.getElementById(targetId)
+      if (el) {
+        e.preventDefault()
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', href)
+      }
+    }
+  }
+
   return (
     <footer className="bg-brand-dark text-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div className="flex flex-col gap-3 lg:col-span-2">
-          <Link to="/" className="w-fit">
+          <Link to="/" className="w-fit" onClick={(e) => handleNavClick(e, '/')}>
             <Logo className="h-8 w-auto" alt={companyInfo.brandName} />
           </Link>
           <p className="max-w-md text-sm leading-relaxed text-white/60">{companyInfo.legalName}</p>
@@ -36,7 +56,11 @@ export function Footer() {
           <ul className="flex flex-col gap-2">
             {INSTITUTIONAL_LINKS.map((link) => (
               <li key={link.href}>
-                <Link to={link.href} className="text-sm text-white/70 transition-colors hover:text-brand-red">
+                <Link
+                  to={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-sm text-white/70 transition-colors hover:text-brand-red"
+                >
                   {link.label}
                 </Link>
               </li>

@@ -8,7 +8,7 @@ import { Logo } from '@/components/ui/Logo'
 const NAV_LINKS = [
   { href: '/', label: 'Inicio' },
   { href: '/#nosotros', label: 'Nosotros' },
-  { href: '/tienda', label: 'Servicios' },
+  { href: '/#suministros', label: 'Insumos' },
   { href: '/#proyectos', label: 'Proyectos' },
   { href: '/#clientes', label: 'Clientes' },
   { href: '/#contacto', label: 'Contacto' },
@@ -23,6 +23,28 @@ export function Navbar({ isScrolled }: NavbarProps) {
 
   const isSolid = isScrolled || mobileOpen
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === '/') {
+      if (window.location.pathname === '/') {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        window.history.pushState(null, '', '/')
+        setMobileOpen(false)
+      }
+      return
+    }
+    if (href.startsWith('/#')) {
+      const targetId = href.replace('/#', '')
+      const el = document.getElementById(targetId)
+      if (el) {
+        e.preventDefault()
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        window.history.pushState(null, '', href)
+        setMobileOpen(false)
+      }
+    }
+  }
+
   return (
     <header
       className={cn(
@@ -31,7 +53,7 @@ export function Navbar({ isScrolled }: NavbarProps) {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link to="/" className="flex items-center shrink-0">
+        <Link to="/" className="flex items-center shrink-0" onClick={(e) => handleNavClick(e, '/')}>
           <Logo className="h-9 w-auto" alt={companyInfo.brandName} />
         </Link>
 
@@ -40,6 +62,7 @@ export function Navbar({ isScrolled }: NavbarProps) {
             <li key={link.href}>
               <Link
                 to={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={cn(
                   'text-xs font-semibold uppercase tracking-wide transition-colors hover:text-brand-red',
                   isSolid ? 'text-zinc-700' : 'text-white/90'
@@ -80,7 +103,7 @@ export function Navbar({ isScrolled }: NavbarProps) {
             <li key={link.href}>
               <Link
                 to={link.href}
-                onClick={() => setMobileOpen(false)}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="block rounded-md px-3 py-2.5 text-sm font-semibold uppercase tracking-wide text-brand-dark hover:bg-black/5"
               >
                 {link.label}

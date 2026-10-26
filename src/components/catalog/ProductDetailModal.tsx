@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CreditCard, FileCheck2, Minus, Plus } from 'lucide-react'
+import { FileCheck2, Minus, Plus } from 'lucide-react'
 import { Modal } from '@/components/ui/Modal'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
@@ -9,10 +9,9 @@ interface ProductDetailModalProps {
   product: Product | null
   onClose: () => void
   onAddToQuote: (product: Product, quantity: number) => void
-  onBuyNow: (product: Product, quantity: number) => void
 }
 
-export function ProductDetailModal({ product, onClose, onAddToQuote, onBuyNow }: ProductDetailModalProps) {
+export function ProductDetailModal({ product, onClose, onAddToQuote }: ProductDetailModalProps) {
   const [quantity, setQuantity] = useState(1)
 
   if (!product) return null
@@ -21,11 +20,6 @@ export function ProductDetailModal({ product, onClose, onAddToQuote, onBuyNow }:
     onAddToQuote(product, quantity)
     setQuantity(1)
     onClose()
-  }
-
-  const handleBuyNow = () => {
-    onBuyNow(product, quantity)
-    setQuantity(1)
   }
 
   const images = [product.imageUrl, ...(product.gallery ?? [])]
@@ -110,20 +104,15 @@ export function ProductDetailModal({ product, onClose, onAddToQuote, onBuyNow }:
                 </button>
               </div>
 
-              <Button className="flex-1 gap-2 font-bold py-2.5 bg-brand-dark hover:bg-brand-red text-white" onClick={handleAdd}>
+              <Button className="flex-1 gap-2 font-bold py-2.5 bg-brand-dark hover:bg-brand-red text-white cursor-pointer" onClick={handleAdd}>
                 <FileCheck2 className="h-4 w-4" />
-                <span>Agregar a Cotización</span>
+                <span>Solicitar Cotización en Portal</span>
               </Button>
             </div>
 
-            <Button
-              variant="outline"
-              className="w-full gap-2 border-zinc-300 text-zinc-700 hover:border-blue-600 hover:text-blue-600 font-medium py-2.5"
-              onClick={handleBuyNow}
-            >
-              <CreditCard className="h-4 w-4 text-blue-600" />
-              <span>Simular Pago Directo (Demo Pasarela)</span>
-            </Button>
+            <p className="text-[11px] text-brand-gray text-center pt-1">
+              Suministro B2B con entrega técnica en obra para clientes registrados de Megaingga.
+            </p>
           </div>
         </div>
       </div>

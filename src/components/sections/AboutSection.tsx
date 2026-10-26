@@ -31,7 +31,7 @@ export function AboutSection() {
     <section
       ref={ref}
       id="nosotros"
-      className="blueprint-grid border-t border-[#EAE8E3] bg-[#FAF9F6] py-24"
+      className="blueprint-grid border-t border-[#EAE8E3] bg-[#FAF9F6] py-24 scroll-mt-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div data-reveal>

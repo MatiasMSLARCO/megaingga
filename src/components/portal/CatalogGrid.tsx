@@ -199,10 +199,6 @@ export function CatalogGrid({ onAddToQuote }: CatalogGridProps) {
           handleAdd(product, qty)
           setSelectedProduct(null)
         }}
-        onBuyNow={(product, qty) => {
-          handleAdd(product, qty)
-          setSelectedProduct(null)
-        }}
       />
     </div>
   )

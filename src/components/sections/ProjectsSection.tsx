@@ -23,7 +23,7 @@ export function ProjectsSection() {
   const ref = useScrollReveal<HTMLElement>({ stagger: 0.1, deps: [projects, isLoading] })
 
   return (
-    <section ref={ref} id="proyectos" className="blueprint-grid-dark bg-brand-ink py-24">
+    <section ref={ref} id="proyectos" className="blueprint-grid-dark bg-brand-ink py-24 scroll-mt-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div data-reveal className="mb-10">
           <SectionHeading

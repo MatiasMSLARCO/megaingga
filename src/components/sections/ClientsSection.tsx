@@ -21,7 +21,7 @@ export function ClientsSection() {
   const ref = useScrollReveal<HTMLElement>()
 
   return (
-    <section ref={ref} id="clientes" className="overflow-hidden border-t border-[#EAE8E3] bg-[#FAF9F6] py-24">
+    <section ref={ref} id="clientes" className="overflow-hidden border-t border-[#EAE8E3] bg-[#FAF9F6] py-24 scroll-mt-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div data-reveal className="mb-12">
           <SectionHeading

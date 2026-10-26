@@ -22,7 +22,7 @@ import type { Product } from '@/types/product.types'
 
 interface ServicesSectionProps {
   onAddToQuote: (product: Product, quantity?: number) => void
-  onBuyNow: (product: Product, quantity: number) => void
+  onBuyNow?: (product: Product, quantity: number) => void
 }
 
 const CATEGORY_TILES = [
@@ -70,7 +70,7 @@ const CATEGORY_TILES = [
   },
 ]
 
-export function ServicesSection({ onAddToQuote, onBuyNow }: ServicesSectionProps) {
+export function ServicesSection({ onAddToQuote }: ServicesSectionProps) {
   const [division, setDivision] = useState<DivisionFilter>('all')
   const [search, setSearch] = useState('')
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
@@ -636,10 +636,6 @@ export function ServicesSection({ onAddToQuote, onBuyNow }: ServicesSectionProps
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
         onAddToQuote={(product, quantity) => onAddToQuote(product, quantity)}
-        onBuyNow={(product, quantity) => {
-          setSelectedProduct(null)
-          onBuyNow(product, quantity)
-        }}
       />
     </section>
   )

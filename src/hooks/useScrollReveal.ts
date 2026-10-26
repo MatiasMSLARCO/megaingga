@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -38,8 +38,9 @@ export function useScrollReveal<T extends HTMLElement>(options?: ScrollRevealOpt
             stagger: options?.stagger ?? 0.08,
             scrollTrigger: {
               trigger: ref.current,
-              start: 'top 80%',
+              start: 'top 85%',
               once: true,
+              invalidateOnRefresh: true,
             },
           }
         )
@@ -52,5 +53,43 @@ export function useScrollReveal<T extends HTMLElement>(options?: ScrollRevealOpt
     { scope: ref, dependencies: options?.deps ?? [], revertOnUpdate: true }
   )
 
+  // Respaldo de visibilidad ante cambios de altura dinámica de página (e.g. alternar Hero 3D a Hero Comercial)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const handleLayoutChange = () => {
+      ScrollTrigger.refresh()
+    }
+    window.addEventListener('megaingga_hero_mode_change', handleLayoutChange)
+
+    let observer: IntersectionObserver | null = null
+    if (typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              const hiddenTargets = el.querySelectorAll<HTMLElement>('[data-reveal]')
+              hiddenTargets.forEach((t) => {
+                if (window.getComputedStyle(t).opacity === '0') {
+                  gsap.to(t, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+                }
+              })
+              observer?.disconnect()
+            }
+          }
+        },
+        { threshold: 0.05 }
+      )
+      observer.observe(el)
+    }
+
+    return () => {
+      window.removeEventListener('megaingga_hero_mode_change', handleLayoutChange)
+      observer?.disconnect()
+    }
+  }, [])
+
   return ref
 }
+
