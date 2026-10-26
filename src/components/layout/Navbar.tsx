@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
-import { Menu, X, FileText } from 'lucide-react'
+import { Menu, X, LogIn } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { companyInfo } from '@/data/company.data'
 import { Logo } from '@/components/ui/Logo'
@@ -15,12 +15,10 @@ const NAV_LINKS = [
 ]
 
 interface NavbarProps {
-  quoteCount: number
-  onOpenQuote: () => void
   isScrolled: boolean
 }
 
-export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
+export function Navbar({ isScrolled }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const isSolid = isScrolled || mobileOpen
@@ -54,19 +52,13 @@ export function Navbar({ quoteCount, onOpenQuote, isScrolled }: NavbarProps) {
         </ul>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onOpenQuote}
-            className="relative inline-flex h-10 items-center gap-2 rounded-md bg-brand-red px-3.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-red/90 cursor-pointer sm:px-4"
+          <Link
+            to="/ingresar"
+            className="inline-flex h-10 items-center gap-2 rounded-md bg-brand-red px-3.5 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-red/90 sm:px-4"
           >
-            <FileText className="h-4 w-4" />
-            <span className="hidden sm:inline">Cotizar</span>
-            {quoteCount > 0 && (
-              <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-dark px-1 text-[10px] font-bold text-white">
-                {quoteCount}
-              </span>
-            )}
-          </button>
+            <LogIn className="h-4 w-4" />
+            <span className="hidden sm:inline">Ingresar</span>
+          </Link>
 
           <button
             type="button"

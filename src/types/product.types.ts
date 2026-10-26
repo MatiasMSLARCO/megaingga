@@ -19,4 +19,5 @@ export interface Product {
   gallery?: string[]
   datasheetAvailable: boolean
   featured: boolean
+  salesCount?: number
 }

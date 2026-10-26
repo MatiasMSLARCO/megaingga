@@ -41,6 +41,7 @@ export const productsMock: Product[] = [
     gallery: ['/assets/images/products/piso-vinilico-alto-trafico.webp'],
     datasheetAvailable: true,
     featured: true,
+    salesCount: 184,
   },
   {
     id: 'prod-03',
@@ -82,6 +83,7 @@ export const productsMock: Product[] = [
     ],
     datasheetAvailable: true,
     featured: true,
+    salesCount: 152,
   },
   {
     id: 'prod-05',
@@ -119,6 +121,7 @@ export const productsMock: Product[] = [
     gallery: ['/assets/images/products/unidad-manejadora-aire-ahu.webp'],
     datasheetAvailable: true,
     featured: true,
+    salesCount: 211,
   },
   {
     id: 'prod-07',
@@ -231,6 +234,7 @@ export const productsMock: Product[] = [
     gallery: [],
     datasheetAvailable: false,
     featured: true,
+    salesCount: 97,
   },
   {
     id: 'prod-14',

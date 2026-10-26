@@ -95,7 +95,7 @@ export function RootLayout() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar quoteCount={cart.totalItemsCount} onOpenQuote={openQuote} isScrolled={isScrolled} />
+      <Navbar isScrolled={isScrolled} />
 
       <main className="relative">
         <Outlet context={outletContext} />

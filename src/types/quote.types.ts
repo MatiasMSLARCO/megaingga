@@ -24,3 +24,16 @@ export interface QuoteRequest {
   createdAt: string
   status: 'draft' | 'generated' | 'sent_whatsapp'
 }
+
+export type PortalQuoteStatus = 'pendiente' | 'activa' | 'completada'
+
+export interface PortalQuote {
+  id: string
+  items: QuoteItem[]
+  totalItemsCount: number
+  createdAt: string
+  status: PortalQuoteStatus
+  projectName?: string
+  requiredDate?: string
+  notes?: string
+}
