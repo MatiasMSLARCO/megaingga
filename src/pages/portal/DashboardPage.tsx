@@ -1,15 +1,28 @@
 import { Link } from 'react-router'
-import { Package, FileText, MessageCircle, ArrowRight, Star, Clock3, CheckCircle2, Loader2, AlertCircle } from 'lucide-react'
+import {
+  Package,
+  FileText,
+  MessageCircle,
+  ArrowRight,
+  Star,
+  Clock3,
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
+  Sparkles,
+} from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
 import { StarRating } from '@/components/portal/StarRating'
 import { useAuth } from '@/context/AuthContext'
+import { useToast } from '@/context/ToastContext'
 import { useOrders } from '@/hooks/useOrders'
 import { useQuotes } from '@/hooks/useQuotes'
 import { useRating } from '@/hooks/useRatings'
 import { ORDER_STATUS_BADGE, ORDER_STATUS_LABELS, formatOrderDate, formatRelativeDate, getOrderProgressPercent } from '@/lib/orderStatus'
 import { averageRating } from '@/lib/rating'
+import { buildAiSummary, getTopProducts } from '@/lib/aiReports'
 import type { Order } from '@/types/order.types'
 
 function itemsSummary(order: Order): string {
@@ -63,6 +76,7 @@ function RatedOrderCard({ order }: { order: Order }) {
 
 export function DashboardPage() {
   const { session } = useAuth()
+  const { toast } = useToast()
   const { data: orders = [], isLoading, isError } = useOrders()
   const { data: quotes = [] } = useQuotes()
 
@@ -71,6 +85,18 @@ export function DashboardPage() {
   const pendingToRate = deliveredOrders.filter((o) => !o.rated).length
   const activeOrdersCount = orders.filter((o) => o.status !== 'entregado').length
   const pendingQuotesCount = quotes.filter((q) => q.status !== 'completada').length
+  const activeQuotesCount = quotes.filter((q) => q.status === 'activa').length
+
+  const topProduct = getTopProducts(orders, 1)[0]?.name ?? null
+  const aiSummary = buildAiSummary(deliveredOrders.length, pendingQuotesCount, topProduct)
+
+  const handleGenerateReport = () => {
+    toast({
+      title: 'Generando reporte con IA',
+      description: 'Estamos analizando tu historial de pedidos y cotizaciones. Te avisaremos cuando esté listo.',
+      variant: 'info',
+    })
+  }
 
   return (
     <div className="flex flex-col gap-8">
@@ -138,6 +164,62 @@ export function DashboardPage() {
             <div>
               <p className="text-2xl font-bold text-brand-dark">{pendingToRate}</p>
               <p className="text-xs text-brand-gray">Por calificar</p>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {/* Reportes con IA */}
+      {!isLoading && !isError && (
+        <div>
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <h2 className="text-xs font-bold uppercase tracking-wide text-brand-gray">Reportes con IA</h2>
+              <Badge variant="outline" className="text-[10px]">
+                Beta
+              </Badge>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link to="/portal/reportes" className="text-xs font-semibold text-brand-red hover:underline">
+                Ver reporte completo
+              </Link>
+              <Button size="sm" variant="outline" className="gap-1.5" onClick={handleGenerateReport}>
+                <Sparkles className="h-3.5 w-3.5" />
+                Generar reporte
+              </Button>
+            </div>
+          </div>
+
+          <Card className="p-5">
+            <div className="flex items-start gap-3">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-dark text-white">
+                <Sparkles className="h-4.5 w-4.5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-bold text-brand-dark">Resumen de tu actividad</p>
+                <p className="mt-1 text-xs leading-relaxed text-brand-gray">{aiSummary}</p>
+              </div>
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div className="rounded-lg border border-brand-border-soft p-3.5">
+                <p className="text-xl font-bold text-brand-dark">{deliveredOrders.length}</p>
+                <p className="mt-0.5 text-[11px] text-brand-gray">Pedidos entregados</p>
+              </div>
+              <div className="rounded-lg border border-brand-border-soft p-3.5">
+                <p className="text-xl font-bold text-brand-dark">{activeQuotesCount}</p>
+                <p className="mt-0.5 text-[11px] text-brand-gray">Cotizaciones activas</p>
+              </div>
+              <div className="min-w-0 rounded-lg border border-brand-border-soft p-3.5">
+                <p className="truncate text-xl font-bold text-brand-dark" title={topProduct ?? undefined}>
+                  {topProduct ?? '—'}
+                </p>
+                <p className="mt-0.5 text-[11px] text-brand-gray">Producto más pedido</p>
+              </div>
+              <div className="rounded-lg border border-brand-border-soft p-3.5">
+                <p className="text-xl font-bold text-brand-dark">94%</p>
+                <p className="mt-0.5 text-[11px] text-brand-gray">Entregas a tiempo (IA)</p>
+              </div>
             </div>
           </Card>
         </div>

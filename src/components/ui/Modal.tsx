@@ -39,13 +39,15 @@ export function Modal({ isOpen, onClose, title, className, children }: ModalProp
         )}
       >
         {title && (
-          <div className="sticky top-0 z-10 flex items-center justify-between border-b border-brand-border-soft bg-white px-6 py-4">
-            <h2 className="text-lg font-bold uppercase tracking-wide text-brand-dark">{title}</h2>
+          <div className="sticky top-0 z-10 flex items-center justify-between gap-3 border-b border-brand-border-soft bg-white px-6 py-4">
+            <h2 className="min-w-0 flex-1 truncate text-lg font-bold uppercase tracking-wide text-brand-dark" title={title}>
+              {title}
+            </h2>
             <button
               type="button"
               onClick={onClose}
               aria-label="Cerrar"
-              className="rounded-full p-1.5 text-brand-gray transition-colors hover:bg-black/5 hover:text-brand-red cursor-pointer"
+              className="shrink-0 rounded-full p-1.5 text-brand-gray transition-colors hover:bg-black/5 hover:text-brand-red cursor-pointer"
             >
               <X className="h-5 w-5" />
             </button>

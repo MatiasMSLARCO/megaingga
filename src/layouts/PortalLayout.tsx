@@ -5,6 +5,7 @@ import {
   Package,
   FileText,
   MessageCircle,
+  Sparkles,
   User,
   LogOut,
   PanelLeftClose,
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
   { to: '/portal', label: 'Dashboard', icon: LayoutDashboard, end: true },
   { to: '/portal/pedidos', label: 'Pedidos', icon: Package, end: false },
   { to: '/portal/cotizaciones', label: 'Cotizaciones', icon: FileText, end: false },
+  { to: '/portal/reportes', label: 'Reportes', icon: Sparkles, end: false },
   { to: '/portal/chat', label: 'Chat', icon: MessageCircle, end: false },
   { to: '/portal/perfil', label: 'Mi Perfil', icon: User, end: false },
 ]

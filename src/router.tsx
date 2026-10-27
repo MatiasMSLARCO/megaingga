@@ -21,6 +21,7 @@ import { LiveTrackingPage } from '@/pages/portal/LiveTrackingPage'
 import { RatingPage } from '@/pages/portal/RatingPage'
 import { QuotesPage } from '@/pages/portal/QuotesPage'
 import { CreateQuotePage } from '@/pages/portal/CreateQuotePage'
+import { ReportsPage } from '@/pages/portal/ReportsPage'
 import { ChatPage } from '@/pages/portal/ChatPage'
 import { ProfilePage } from '@/pages/portal/ProfilePage'
 
@@ -77,6 +78,7 @@ export const router = createBrowserRouter([
       { path: 'pedidos/:orderId/calificar', Component: RatingPage },
       { path: 'cotizaciones', Component: QuotesPage },
       { path: 'cotizaciones/crear', Component: CreateQuotePage },
+      { path: 'reportes', Component: ReportsPage },
       { path: 'chat', Component: ChatPage },
       { path: 'perfil', Component: ProfilePage },
     ],
